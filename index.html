@@ -38,43 +38,6 @@
 </head>
 <body class="bg-gray-100">
 
-    <!-- 
-        Chosen Palette: Energetic & Playful: 
-        #FF6B6B (Coral Red), 
-        #FFD166 (Sunny Yellow), 
-        #06D6A0 (Mint Green), 
-        #118AB2 (Bright Blue), 
-        #073B4C (Dark Teal/Navy) 
-    -->
-    <!-- 
-        Infographic Narrative Plan: 
-        1. Title/Intro (Hook); 
-        2. Campos do Jordão Overview (Stats, Donut Chart); 
-        3. Pousada Profiles (Premium & Raizes - Icons, Text); 
-        4. Primary Markets (Bar Chart, Table - SP, RJ, MG); 
-        5. Secondary Markets (List - PR, DF, Others); 
-        6. YouTube Fine-Tuning (HTML/CSS Cards for strategies, Gemini API Integration for Interests & Ad Scripts); 
-        7. Conclusion/CTA. 
-    -->
-    <!-- 
-        Visualization Choices (NO SVG, NO MERMAID JS):
-        - Section 2 (Campos Overview):
-            - Data: Tourist numbers (4.5M total, 1.5M winter). Goal: Inform. Viz: Large Text Numbers. Method: HTML/Tailwind.
-            - Data: Tourist distribution by season (estimated). Goal: Compare. Viz: Donut Chart. Lib: Chart.js (Canvas). Justification: Proportions of a whole.
-        - Section 3 (Pousada Profiles):
-            - Data: Pousada features/target audience. Goal: Inform. Viz: Unicode Icons + Text. Method: HTML/Unicode. Justification: Quick visual cues.
-        - Section 4 (Primary Markets):
-            - Data: Priority of states (SP, RJ, MG based on # of primary cities/regions). Goal: Compare. Viz: Bar Chart. Lib: Chart.js (Canvas). Justification: Compare categorical data.
-            - Data: Detailed primary cities/regions per state. Goal: Organize. Viz: Table. Method: HTML/Tailwind. Justification: Structured data display.
-        - Section 5 (Secondary Markets):
-            - Data: List of secondary markets. Goal: Organize. Viz: List. Method: HTML/Tailwind. Justification: Simple enumeration.
-        - Section 6 (YouTube Tuning):
-            - Data: YouTube segmentation strategies. Goal: Organize. Viz: Card-based layout. Method: HTML/CSS/Tailwind.
-            - Data: AI-generated interest suggestions. Goal: Inform/Expand. Viz: Text list. Method: Gemini API call, HTML display.
-            - Data: AI-generated ad script ideas. Goal: Inform/Create. Viz: Text list. Method: Gemini API call, HTML display.
-        - Confirmation: No SVG graphics or Mermaid JS used. All charts via Chart.js (Canvas). Diagrams/layouts via HTML/CSS. Icons via Unicode.
-    -->
-
     <header class="bg-[#118AB2] text-white py-8 shadow-lg">
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-5xl font-bold">Destinos Estratégicos para as Pousadas D'Biagy</h1>
@@ -406,7 +369,8 @@
             
             let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
             const payload = { contents: chatHistory };
-            const apiKey = ""; 
+            // ATENÇÃO: Substitua "" pela sua chave de API real do Gemini!
+            const apiKey = "AIzaSyCtw-bRdh6x7mX-xkpTWMCrZ1DcS9iEA5g"; // <<<<<< INSIRA SUA CHAVE DE API AQUI
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
@@ -478,7 +442,8 @@
             
             let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
             const payload = { contents: chatHistory };
-            const apiKey = ""; 
+            // ATENÇÃO: Substitua "" pela sua chave de API real do Gemini!
+            const apiKey = "SUA_CHAVE_DE_API_REAL_VAI_AQUI"; // <<<<<< INSIRA SUA CHAVE DE API AQUI
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
@@ -500,9 +465,8 @@
                     result.candidates[0].content && result.candidates[0].content.parts &&
                     result.candidates[0].content.parts.length > 0) {
                     let text = result.candidates[0].content.parts[0].text;
-                    // Basic formatting for display: make bold parts actually bold, and handle newlines
-                    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold
-                    text = text.replace(/\n/g, '<br>'); // Newlines
+                    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); 
+                    text = text.replace(/\n/g, '<br>'); 
                     geminiAdScriptResult.innerHTML = text;
 
                 } else {
@@ -519,7 +483,6 @@
                 generateAdScriptButton.disabled = false;
             }
         });
-
 
     </script>
 </body>
