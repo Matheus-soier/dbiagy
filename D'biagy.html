@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Análise de Mercado Pousadas D'Biagy com IA Avançada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #FFD166; /* Sunny Yellow from palette */
+            width: 24px;
+            height: 24px;
+            animation: spin 1s ease-in-out infinite;
+            margin: 5px auto; 
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .gemini-output-content {
+            white-space: pre-wrap; /* Preserve line breaks from Gemini response */
+            background-color: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- 
+        Chosen Palette: Energetic & Playful: 
+        #FF6B6B (Coral Red), 
+        #FFD166 (Sunny Yellow), 
+        #06D6A0 (Mint Green), 
+        #118AB2 (Bright Blue), 
+        #073B4C (Dark Teal/Navy) 
+    -->
+    <!-- 
+        Infographic Narrative Plan: 
+        1. Title/Intro (Hook); 
+        2. Campos do Jordão Overview (Stats, Donut Chart); 
+        3. Pousada Profiles (Premium & Raizes - Icons, Text); 
+        4. Primary Markets (Bar Chart, Table - SP, RJ, MG); 
+        5. Secondary Markets (List - PR, DF, Others); 
+        6. YouTube Fine-Tuning (HTML/CSS Cards for strategies, Gemini API Integration for Interests & Ad Scripts); 
+        7. Conclusion/CTA. 
+    -->
+    <!-- 
+        Visualization Choices (NO SVG, NO MERMAID JS):
+        - Section 2 (Campos Overview):
+            - Data: Tourist numbers (4.5M total, 1.5M winter). Goal: Inform. Viz: Large Text Numbers. Method: HTML/Tailwind.
+            - Data: Tourist distribution by season (estimated). Goal: Compare. Viz: Donut Chart. Lib: Chart.js (Canvas). Justification: Proportions of a whole.
+        - Section 3 (Pousada Profiles):
+            - Data: Pousada features/target audience. Goal: Inform. Viz: Unicode Icons + Text. Method: HTML/Unicode. Justification: Quick visual cues.
+        - Section 4 (Primary Markets):
+            - Data: Priority of states (SP, RJ, MG based on # of primary cities/regions). Goal: Compare. Viz: Bar Chart. Lib: Chart.js (Canvas). Justification: Compare categorical data.
+            - Data: Detailed primary cities/regions per state. Goal: Organize. Viz: Table. Method: HTML/Tailwind. Justification: Structured data display.
+        - Section 5 (Secondary Markets):
+            - Data: List of secondary markets. Goal: Organize. Viz: List. Method: HTML/Tailwind. Justification: Simple enumeration.
+        - Section 6 (YouTube Tuning):
+            - Data: YouTube segmentation strategies. Goal: Organize. Viz: Card-based layout. Method: HTML/CSS/Tailwind.
+            - Data: AI-generated interest suggestions. Goal: Inform/Expand. Viz: Text list. Method: Gemini API call, HTML display.
+            - Data: AI-generated ad script ideas. Goal: Inform/Create. Viz: Text list. Method: Gemini API call, HTML display.
+        - Confirmation: No SVG graphics or Mermaid JS used. All charts via Chart.js (Canvas). Diagrams/layouts via HTML/CSS. Icons via Unicode.
+    -->
+
+    <header class="bg-[#118AB2] text-white py-8 shadow-lg">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold">Destinos Estratégicos para as Pousadas D'Biagy</h1>
+            <p class="mt-4 text-lg md:text-xl">Onde Encontrar os Hóspedes Ideais em Campos do Jordão para suas Campanhas no YouTube</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="campos-overview" class="mb-16">
+            <div class="bg-white rounded-xl shadow-2xl p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#073B4C]">Campos do Jordão: Um Ímã Turístico</h2>
+                <p class="text-center text-gray-600 mb-10">Conhecida como a "Suíça Brasileira", Campos do Jordão atrai milhões de visitantes com sua beleza natural, clima serrano e charme europeu. Entender esse fluxo é o primeiro passo para campanhas de sucesso.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                        <div class="mb-6">
+                            <p class="text-6xl font-bold text-[#118AB2]">4,5 Mi+</p>
+                            <p class="text-xl text-gray-700">Turistas Anuais</p>
+                        </div>
+                        <div>
+                            <p class="text-6xl font-bold text-[#06D6A0]">1,5 Mi+</p>
+                            <p class="text-xl text-gray-700">Visitantes só no Inverno</p>
+                        </div>
+                        <p class="mt-6 text-gray-600 text-sm">A alta temporada de inverno, impulsionada pelo Festival de Inverno, e as festas de final de ano são períodos de pico, mas a cidade atrai visitantes durante todo o ano.</p>
+                    </div>
+                    <div class="chart-container max-w-md h-72 sm:h-80 md:h-96">
+                        <canvas id="sazonalidadeTuristasChart"></canvas>
+                        <p class="text-center text-xs text-gray-500 mt-2">Distribuição estimada de turistas por período.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="perfis-hospedes" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-10 text-[#073B4C]">Conhecendo os Hóspedes D'Biagy</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-2xl p-6 md:p-8 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-[#118AB2] mb-4">Pousada D'Biagy Premium</h3>
+                    <p class="text-gray-700 mb-1">Luxo, exclusividade e modernidade definem a Premium. Localizada a poucos metros da Vila Capivari, é reconhecida pelo TripAdvisor como a melhor da cidade.</p>
+                    <p class="text-gray-700 mb-4">Ideal para quem busca uma experiência sofisticada e memorável.</p>
+                    <p class="font-semibold text-gray-800 mb-1">Público-Alvo Principal:</p>
+                    <ul class="list-none space-y-1 text-gray-700 text-sm">
+                        <li><span class="mr-2">💎</span> Casais Românticos (luxo e exclusividade)</li>
+                        <li><span class="mr-2">📱</span> Casais Conectados (experiências e registros)</li>
+                        <li><span class="mr-2">👨‍👩‍👧‍👦</span> Famílias (descanso e lazer sofisticado)</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600"><span class="mr-2">🔌🚗</span> Possui carregadores para carros elétricos.</p>
+                    <p class="mt-1 text-xs text-red-500">🚫 Não aceita pets.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-2xl p-6 md:p-8 transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold text-[#06D6A0] mb-4">Pousada D'Biagy Raízes</h3>
+                    <p class="text-gray-700 mb-1">Um refúgio acolhedor com estilo suíço, promovendo a essência familiar e a tradição de bem receber.</p>
+                    <p class="text-gray-700 mb-4">Perfeita para quem valoriza o aconchego, a tradição e o conforto de alta qualidade.</p>
+                    <p class="font-semibold text-gray-800 mb-1">Público-Alvo Principal:</p>
+                    <ul class="list-none space-y-1 text-gray-700 text-sm">
+                        <li><span class="mr-2">🏡</span> Casais Românticos (aconchego e intimismo)</li>
+                        <li><span class="mr-2">👴👵</span> Melhor Idade (estadia relaxante)</li>
+                        <li><span class="mr-2">👨‍👩‍👧‍👦</span> Famílias (memórias e descanso tradicional)</li>
+                    </ul>
+                    <p class="mt-3 text-sm text-gray-600"><span class="mr-2">🔌🚗</span> Possui carregadores para carros elétricos.</p>
+                    <p class="mt-1 text-xs text-red-500">🚫 Não aceita pets.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mercados-primarios" class="mb-16">
+            <div class="bg-white rounded-xl shadow-2xl p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#073B4C]">Mercados Emissores Primários: Foco Estratégico</h2>
+                <p class="text-center text-gray-600 mb-10">Identificamos regiões prioritárias com base na proximidade, potencial econômico e alinhamento com o perfil dos hóspedes D'Biagy. São Paulo, Rio de Janeiro e Minas Gerais despontam como os principais estados emissores.</p>
+                
+                <div class="chart-container max-w-2xl mx-auto h-80 md:h-96 lg:h-[500px] mb-12">
+                    <canvas id="mercadosPrimariosChart"></canvas>
+                     <p class="text-center text-xs text-gray-500 mt-2">Representação da prioridade dos estados emissores (baseado no nº de regiões/cidades chave).</p>
+                </div>
+
+                <h3 class="text-2xl font-semibold text-center text-[#118AB2] mb-6">Principais Cidades e Regiões por Estado (Foco Primário)</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cidades/Regiões Chave</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Justificativa Principal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">São Paulo</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">Capital e RM, Campinas e Região, São José dos Campos e Vale do Paraíba, Ribeirão Preto e Região, Jundiaí, Santos e Baixada Santista, Sorocaba</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">Maior mercado emissor, alta renda, proximidade.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rio de Janeiro</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">Capital e RM, Niterói, Região Serrana (Petrópolis, Teresópolis, etc.)</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">Grande população, interesse em destinos de serra, proximidade razoável, alto poder aquisitivo (Niterói).</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Minas Gerais</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">Belo Horizonte e RM, Sul de Minas (Pouso Alegre, Varginha, Extrema, Poços de Caldas), Juiz de Fora e Zona da Mata</td>
+                                <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">Capital estadual, público valoriza cultura e natureza, proximidade relativa (Sul de MG), economia em crescimento.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="mercados-secundarios" class="mb-16">
+            <div class="bg-white rounded-xl shadow-2xl p-6 md:p-10">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#073B4C]">Mercados Secundários: Potencial de Expansão</h2>
+                <p class="text-center text-gray-600 mb-10">Além dos mercados primários, existem outras regiões com potencial para atrair hóspedes, especialmente aqueles com maior poder aquisitivo e dispostos a viagens mais longas, utilizando o acesso aéreo facilitado pelos aeroportos de Guarulhos (GRU) e São José dos Campos (SJC).</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h4 class="font-semibold text-lg text-[#118AB2] mb-2">Paraná</h4>
+                        <p class="text-sm text-gray-700"><strong>Curitiba e Região Metropolitana:</strong> Alto IDH, perfil cultural e apreço por climas amenos. Acesso aéreo é uma opção viável.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h4 class="font-semibold text-lg text-[#06D6A0] mb-2">Distrito Federal</h4>
+                        <p class="text-sm text-gray-700"><strong>Brasília:</strong> Alta renda per capita, importante hub aéreo. Público busca destinos sofisticados e com oferta de natureza.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md sm:col-span-2 lg:col-span-1">
+                        <h4 class="font-semibold text-lg text-[#FFD166] mb-2">Outras Capitais Sul/Sudeste</h4>
+                        <p class="text-sm text-gray-700"><strong>Florianópolis (SC), Porto Alegre (RS), Vitória (ES):</strong> Cidades com poder aquisitivo e conexões aéreas, representando um público potencial para experiências de luxo.</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-center text-gray-600 text-sm">A exploração desses mercados pode ser gradual, com campanhas de teste e segmentação de interesse específica, visando um público que valoriza a experiência oferecida pelas Pousadas D'Biagy.</p>
+            </div>
+        </section>
+
+        <section id="youtube-tuning" class="py-12 bg-[#073B4C] text-white rounded-xl shadow-2xl mb-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-3">Maximizando o Impacto no YouTube</h2>
+                <p class="text-center text-gray-300 mb-10">Além da geografia, refine sua segmentação com estas estratégias e ferramentas de IA para alcançar o público certo na plataforma:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 transform hover:scale-105 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center mb-3"><span class="text-3xl mr-3 text-[#FFD166]">🎯</span><h3 class="text-xl font-semibold">Interesses Detalhados</h3></div>
+                        <p class="text-gray-200 text-sm">Viagens de Luxo, Escapadas Românticas, Ecoturismo, Gastronomia de Alta Qualidade, Arquitetura Europeia, Festivais, Bem-estar, Carros Elétricos.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 transform hover:scale-105 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center mb-3"><span class="text-3xl mr-3 text-[#06D6A0]">👥</span><h3 class="text-xl font-semibold">Públicos Personalizados e Semelhantes</h3></div>
+                        <p class="text-gray-200 text-sm">Use listas de clientes (com consentimento) para criar públicos semelhantes e alcançar novos usuários com perfis parecidos.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 transform hover:scale-105 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center mb-3"><span class="text-3xl mr-3 text-[#FF6B6B]">🔄</span><h3 class="text-xl font-semibold">Remarketing Estratégico</h3></div>
+                        <p class="text-gray-200 text-sm">Impacte usuários que visitaram o site das Pousadas D'Biagy mas não concluíram uma reserva.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 transform hover:scale-105 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center mb-3"><span class="text-3xl mr-3 text-[#118AB2]">📊</span><h3 class="text-xl font-semibold">Dados Demográficos</h3></div>
+                        <p class="text-gray-200 text-sm">Refine por faixa etária (ex: 25-65+), status de relacionamento (casais) e indicadores de poder aquisitivo.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-6 transform hover:scale-105 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center mb-3"><span class="text-3xl mr-3 text-yellow-300">🔑</span><h3 class="text-xl font-semibold">Palavras-chave Relevantes</h3></div>
+                        <p class="text-gray-200 text-sm">Segmente usuários com base em suas pesquisas: "pousada em Campos do Jordão", "hotel de luxo serra", "viagem romântica montanha", "férias em família Campos do Jordão", "melhor pousada Campos do Jordão".</p>
+                    </div>
+                    
+                    <div class="bg-white/20 backdrop-blur-md rounded-lg p-6 transform hover:scale-105 transition-transform duration-300 shadow-lg">
+                        <div class="flex items-center mb-3">
+                            <span class="text-3xl mr-3">✨</span>
+                            <h3 class="text-xl font-semibold">Ideias de Interesses com IA</h3>
+                        </div>
+                        <p class="text-gray-200 text-sm mb-4">Clique para gerar sugestões de nicho adicionais para suas campanhas.</p>
+                        <button id="generateInterestsButton" class="w-full bg-[#FFD166] hover:bg-yellow-500 text-[#073B4C] font-bold py-2 px-4 rounded-md transition-colors duration-300">
+                            Sugerir Interesses
+                        </button>
+                        <div id="loadingInterestsIndicator" class="hidden mt-3">
+                            <div class="spinner"></div>
+                            <p class="text-center text-sm text-gray-300">Gerando...</p>
+                        </div>
+                        <div id="geminiInterestsResult" class="mt-4 text-gray-200 text-sm gemini-output-content"></div>
+                         <p id="geminiInterestsError" class="mt-2 text-sm text-red-400"></p>
+                    </div>
+
+                    <div class="bg-white/20 backdrop-blur-md rounded-lg p-6 transform hover:scale-105 transition-transform duration-300 shadow-lg md:col-span-2 lg:col-span-3">
+                        <div class="flex items-center mb-3">
+                            <span class="text-3xl mr-3">🎬</span>
+                            <h3 class="text-xl font-semibold">✨ Gerador de Ideias para Roteiros de Anúncios</h3>
+                        </div>
+                        <p class="text-gray-200 text-sm mb-2">Precisa de inspiração para seu próximo vídeo? Descreva um tema ou foco para o anúncio (opcional):</p>
+                        <input type="text" id="adScriptTheme" placeholder="Ex: Romance, Aventura em Família, Luxo na Serra" class="w-full p-2 rounded-md bg-white/20 text-white placeholder-gray-300 border border-transparent focus:border-[#FFD166] focus:ring-0 mb-3">
+                        <button id="generateAdScriptButton" class="w-full bg-[#06D6A0] hover:bg-teal-500 text-[#073B4C] font-bold py-2 px-4 rounded-md transition-colors duration-300">
+                            Criar Ideias de Roteiro
+                        </button>
+                        <div id="loadingAdScriptIndicator" class="hidden mt-3">
+                            <div class="spinner" style="border-top-color: #06D6A0;"></div>
+                            <p class="text-center text-sm text-gray-300">Criando roteiros...</p>
+                        </div>
+                        <div id="geminiAdScriptResult" class="mt-4 text-gray-200 text-sm gemini-output-content"></div>
+                         <p id="geminiAdScriptError" class="mt-2 text-sm text-red-400"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusao" class="text-center py-12">
+            <h2 class="text-3xl font-bold text-[#073B4C] mb-4">Planeje Suas Campanhas com Inteligência</h2>
+            <p class="text-gray-700 max-w-3xl mx-auto mb-8">A segmentação geográfica precisa, combinada com um profundo entendimento do público e das ferramentas do YouTube, é a chave para o sucesso das suas campanhas. Comece pelos mercados primários, monitore os resultados, expanda estrategicamente e explore novas ideias com IA.</p>
+            <a href="https://familiadbiagy.com.br/" target="_blank" 
+               class="inline-block bg-[#FF6B6B] hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-colors duration-300 text-lg">
+                Conheça as Pousadas D'Biagy
+            </a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-6">
+        <p class="text-sm">&copy; <span id="currentYear"></span> Análise de Mercado para Pousadas D'Biagy. Infográfico gerado com base em pesquisa e IA.</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        function wrapLabel(str, maxWidth) {
+            if (!str) return '';
+            if (str.length <= maxWidth) return str;
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine.length + words[i].length + 1) <= maxWidth) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+        
+        const tooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        const sazonalidadeCtx = document.getElementById('sazonalidadeTuristasChart').getContext('2d');
+        new Chart(sazonalidadeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Inverno (Jun-Set)', 'Final de Ano (Nov-Jan)', 'Outras Épocas'],
+                datasets: [{
+                    label: 'Distribuição de Turistas',
+                    data: [1.5, 1.0, 2.0], 
+                    backgroundColor: ['#118AB2', '#06D6A0', '#FFD166'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#073B4C', font: { size: 12 }}},
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback,
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed !== null) { label += context.parsed.toLocaleString('pt-BR') + ' Mi'; }
+                                return label;
+                            }
+                        },
+                        backgroundColor: '#073B4C', titleColor: '#FFFFFF', bodyColor: '#FFFFFF', borderColor: '#118AB2', borderWidth: 1
+                    }
+                }
+            }
+        });
+
+        const mercadosPrimariosCtx = document.getElementById('mercadosPrimariosChart').getContext('2d');
+        const originalLabelsMercados = ['São Paulo', 'Rio de Janeiro', 'Minas Gerais'];
+        const processedLabelsMercados = originalLabelsMercados.map(label => wrapLabel(label, 16));
+
+        new Chart(mercadosPrimariosCtx, {
+            type: 'bar',
+            data: {
+                labels: processedLabelsMercados,
+                datasets: [{
+                    label: 'Nº de Cidades/Regiões Chave Prioritárias',
+                    data: [7, 3, 3],
+                    backgroundColor: ['#118AB2', '#06D6A0', '#FFD166'],
+                    borderColor: ['#073B4C', '#073B4C', '#073B4C'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y', 
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { beginAtZero: true, ticks: { color: '#073B4C', stepSize: 1 }, grid: { display: false }},
+                    y: { ticks: { color: '#073B4C', font: {size: 12} }, grid: { color: '#E0E0E0' }}
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                         callbacks: {
+                            title: tooltipTitleCallback,
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed.x !== null) { label += context.parsed.x; }
+                                return label;
+                            }
+                        },
+                        backgroundColor: '#073B4C', titleColor: '#FFFFFF', bodyColor: '#FFFFFF',
+                    }
+                }
+            }
+        });
+
+        // Gemini API Integration - Interests
+        const generateInterestsButton = document.getElementById('generateInterestsButton');
+        const loadingInterestsIndicator = document.getElementById('loadingInterestsIndicator');
+        const geminiInterestsResult = document.getElementById('geminiInterestsResult');
+        const geminiInterestsError = document.getElementById('geminiInterestsError');
+
+        generateInterestsButton.addEventListener('click', async () => {
+            loadingInterestsIndicator.classList.remove('hidden');
+            generateInterestsButton.disabled = true;
+            geminiInterestsResult.innerHTML = '';
+            geminiInterestsError.textContent = '';
+
+            const prompt = `Você é um especialista em marketing digital para o setor de turismo de luxo e aconchego. Para pousadas em Campos do Jordão, que já segmentam para os seguintes interesses no YouTube: Viagens de Luxo, Escapadas Românticas, Ecoturismo, Gastronomia de Alta Qualidade, Arquitetura Europeia, Festivais, Bem-estar, Carros Elétricos. Sugira 5-7 interesses de nicho adicionais, criativos e relevantes para campanhas no YouTube. Evite repetir os interesses já listados. Formate a resposta como uma lista simples de interesses, onde cada interesse está em uma nova linha, começando com um hífen e um espaço (ex: - Interesse X).`;
+            
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { contents: chatHistory };
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Gemini API Error Response (Interests):', errorData);
+                    throw new Error(`Erro na API: ${response.status} ${response.statusText}. Detalhes: ${JSON.stringify(errorData.error ? errorData.error.message : errorData)}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    const interests = text.split('\n').map(interest => interest.trim()).filter(interest => interest.startsWith('- '));
+                    
+                    if (interests.length > 0) {
+                        let htmlOutput = '<p class="font-semibold mb-2">Sugestões de Interesses:</p><ul class="list-disc list-inside space-y-1">';
+                        interests.forEach(interest => {
+                            htmlOutput += `<li>${interest.substring(2)}</li>`; 
+                        });
+                        htmlOutput += '</ul>';
+                        geminiInterestsResult.innerHTML = htmlOutput;
+                    } else {
+                        geminiInterestsResult.innerHTML = '<p>Não foi possível extrair sugestões no formato esperado. Tente novamente.</p>';
+                    }
+                } else {
+                    console.error('Unexpected Gemini API response structure (Interests):', result);
+                    geminiInterestsResult.innerHTML = '<p>Resposta inesperada da IA. Verifique o console para detalhes.</p>';
+                }
+
+            } catch (error) {
+                console.error('Erro ao chamar a API Gemini (Interests):', error);
+                geminiInterestsError.textContent = `Falha ao gerar sugestões de interesses: ${error.message}. Tente novamente mais tarde.`;
+                geminiInterestsResult.innerHTML = '<p class="text-red-400">Ocorreu um erro ao buscar sugestões.</p>';
+            } finally {
+                loadingInterestsIndicator.classList.add('hidden');
+                generateInterestsButton.disabled = false;
+            }
+        });
+
+        // Gemini API Integration - Ad Scripts
+        const generateAdScriptButton = document.getElementById('generateAdScriptButton');
+        const adScriptThemeInput = document.getElementById('adScriptTheme');
+        const loadingAdScriptIndicator = document.getElementById('loadingAdScriptIndicator');
+        const geminiAdScriptResult = document.getElementById('geminiAdScriptResult');
+        const geminiAdScriptError = document.getElementById('geminiAdScriptError');
+
+        generateAdScriptButton.addEventListener('click', async () => {
+            loadingAdScriptIndicator.classList.remove('hidden');
+            generateAdScriptButton.disabled = true;
+            geminiAdScriptResult.innerHTML = '';
+            geminiAdScriptError.textContent = '';
+
+            const userTheme = adScriptThemeInput.value.trim();
+            let themePromptPart = "experiências memoráveis";
+            if (userTheme) {
+                themePromptPart = userTheme;
+            }
+
+            const prompt = `Você é um roteirista criativo especializado em anúncios de turismo para o YouTube. Crie 2-3 ideias concisas para roteiros de anúncios em vídeo (máximo 30 segundos cada) para as Pousadas D'Biagy em Campos do Jordão. Cada ideia deve incluir: 1. Um gancho (primeiros 3-5 segundos). 2. Sugestões de cenas/visuais. 3. Uma chamada para ação clara. Considere o público que busca ${themePromptPart} em Campos do Jordão. Formate a resposta como uma lista numerada de ideias (ex: 1. Ideia de Roteiro: ...), com cada parte do roteiro (Gancho, Cenas/Visuais, Chamada para Ação) claramente indicada e em negrito. Use quebras de linha para separar as seções de cada ideia.`;
+            
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { contents: chatHistory };
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Gemini API Error Response (Ad Scripts):', errorData);
+                    throw new Error(`Erro na API: ${response.status} ${response.statusText}. Detalhes: ${JSON.stringify(errorData.error ? errorData.error.message : errorData)}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    let text = result.candidates[0].content.parts[0].text;
+                    // Basic formatting for display: make bold parts actually bold, and handle newlines
+                    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold
+                    text = text.replace(/\n/g, '<br>'); // Newlines
+                    geminiAdScriptResult.innerHTML = text;
+
+                } else {
+                    console.error('Unexpected Gemini API response structure (Ad Scripts):', result);
+                    geminiAdScriptResult.innerHTML = '<p>Resposta inesperada da IA. Verifique o console para detalhes.</p>';
+                }
+
+            } catch (error) {
+                console.error('Erro ao chamar a API Gemini (Ad Scripts):', error);
+                geminiAdScriptError.textContent = `Falha ao gerar ideias de roteiro: ${error.message}. Tente novamente mais tarde.`;
+                geminiAdScriptResult.innerHTML = '<p class="text-red-400">Ocorreu um erro ao buscar ideias de roteiro.</p>';
+            } finally {
+                loadingAdScriptIndicator.classList.add('hidden');
+                generateAdScriptButton.disabled = false;
+            }
+        });
+
+
+    </script>
+</body>
+</html>
